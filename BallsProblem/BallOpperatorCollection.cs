@@ -14,7 +14,7 @@ namespace BallsProblem
             {
                 for (int j = 0; j < BallState.NumOfSquares; j++)
                 {
-                    if (i == j) operatorList.Add(new Move(i, j));
+                    if (i != j) operatorList.Add(new Move(i, j));
                 }
             }
         }

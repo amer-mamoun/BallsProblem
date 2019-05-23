@@ -40,7 +40,19 @@ namespace BallsProblem
 
         protected override bool loopDetected(GraphNode currentNode)
         {
-            return (closedNodes.Contains(currentNode) || openNodes.Contains(currentNode));
+            foreach (GraphNode item in closedNodes)
+            {
+                if (item.Equals(currentNode))
+                    return true;
+            }
+            foreach (GraphNode item in openNodes)
+            {
+                if (item.Equals(currentNode))
+                    return true;
+            }
+            return false;
+
+            //return false;// (closedNodes.Contains(currentNode) && openNodes.Contains(currentNode));
         }
     }
 }

@@ -42,18 +42,11 @@ namespace BallsProblem
             }
 
             BallState currentState = new BallState();
-            int i = -1;
-            for (; i < currentState.Square.Length; i++)
-            {
-                if (i >= 0 && currentState.Square[i] == fromCell)
-                {
-                    break;
-                }
-            }
-            if (i == -1 || i >= currentState.Square.Length)
-            {
-                return false;
-            }
+            if (toCell + 1 >= BallState._numOfSquares) return false;
+            if (Math.Abs(ToCell - FromCell) < 2) return false;
+            if (currentState.Square[FromCell] == 0 || currentState.Square[FromCell + 1] == 0) return false;
+            if (currentState.Square[ToCell] != 0 || currentState.Square[ToCell + 1] != 0) return false;
+
             return true;
         }
 
@@ -69,8 +62,14 @@ namespace BallsProblem
                 return null;
             }
             BallState newState = (ballState.Clone() as BallState);
-            int ballToMove = Array.IndexOf(newState.Square, FromCell);
-            newState.Square[ballToMove] = ToCell;
+            int indexToMove = FromCell;
+            int toBeMoved1 = newState.Square[indexToMove];
+            newState.Square[FromCell] = 0;
+            newState.Square[toCell] = toBeMoved1;
+            int toBeMoved2 = newState.Square[indexToMove + 1];
+            newState.Square[FromCell + 1] = 0;
+            newState.Square[toCell + 1] = toBeMoved2;
+
             return newState;
         }
 

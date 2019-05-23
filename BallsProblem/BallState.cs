@@ -10,7 +10,7 @@ namespace BallsProblem
     {
 
         const int NUMOFSQUARES = 16;
-        private int[] square;
+        public int[] square = new int[NUMOFSQUARES] { 1, 2, 1, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         public int[] Square
         {
             get { return square; }
@@ -39,30 +39,34 @@ namespace BallsProblem
         }
         public BallState()
         {
-            square = new int[NUMOFSQUARES] { 1, 2, 1, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
         public bool isGoal()
         {
-            for (int i = 0; i < square.Length; i++)
+            int redcounter= 0;
+            int blackcounter = 0;
+            for (int i = 0; i < square.Length - 1; i++)
             {
-                if (square[i] != 1 && square[i + 1] != 1 && square[i + 2] != 1 && square[i + 3] != 2 && square[i + 4] != 2 && square[i + 5] != 2)
-                { return false; }
-
+                if ((redcounter == 1 || redcounter == 2) && square[i] != 1)
+                    return false;
+                if (redcounter == 3 && square[i] != 2)
+                    return false;
+                if ((blackcounter == 1 || blackcounter == 2) && square[i] != 2)
+                    return false;
+                if (square[i] == 1) redcounter++;
+                if (redcounter == 3 && square[i] == 2)
+                    blackcounter++;
             }
             return true;
         }
 
         public bool isValid()
         {
-            for (int i = 0; i < square.Length; i++)
-            {
-                if ((square[i] == 1 && (square[i + 1] == 2 || square[i - 1] == 2)) || (square[i] == 2 && (square[i + 1] == 1 || square[i - 1] == 1)))
-                {
-                    return true;
-                }
-            }
-            return false;
+            //for (int i = 0; i < square.Length - 1; i++)
+            //{
+            //    if (square[i] != 1 || square[i] != 2) return false;
+            //}
+            return true;
         }
 
         public int Heuristics
