@@ -27,6 +27,7 @@ namespace BallsProblem
             nextStepLbl.Text = (solutionIndex + 1).ToString();
 
 
+
         }
 
         private void PrevStepBtn_Click(object sender, EventArgs e)
@@ -47,13 +48,33 @@ namespace BallsProblem
             }
         }
 
-        private void BFSsearchBtn_Click(object sender, EventArgs e)
+        private void BFSBtn_Click(object sender, EventArgs e)
         {
             BreadthFirstSearch<BallState, BallOpperatorCollection> bfSearch = new BreadthFirstSearch<BallState, BallOpperatorCollection>();
             solution = bfSearch.Search();
             prevStepLbl.Text = solution != null ? solution.Count.ToString() : "";
             //Drawstate(solution[0]);
             numOfVisitedNodesLbl.Text = bfSearch.numOfVisitedNodes().ToString();
+
+        }
+
+        private void AAlgBtn_Click(object sender, EventArgs e)
+        {
+            AAlgorithem<BallState, BallOpperatorCollection> aAlgorithem = new AAlgorithem<BallState, BallOpperatorCollection>();
+            solution = aAlgorithem.Search();
+            prevStepLbl.Text = solution != null ? solution.Count.ToString() : "";
+            //Drawstate(solution[0]);
+            numOfVisitedNodesLbl.Text = aAlgorithem.numOfVisitedNodes().ToString();
+
+        }
+
+        private void DFSBtn_Click(object sender, EventArgs e)
+        {
+            DepthFirstSearch<BallState, BallOpperatorCollection> dfSearch = new DepthFirstSearch<BallState, BallOpperatorCollection>();
+            solution = dfSearch.Search();
+            prevStepLbl.Text = solution != null ? solution.Count.ToString() : "";
+
+            numOfVisitedNodesLbl.Text = dfSearch.numOfVisitedNodes().ToString();
 
         }
     }

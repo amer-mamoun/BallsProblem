@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 
 namespace BallsProblem
 {
-    class BreadthFirstSearch<S, Op> : ATreeSearch<S, Op>
-        where S : IState, new()
-        where Op : AOperatorCollection, new()
+    class AAlgorithem<S, Op> : ATreeSearch<S, Op>
+         where S : IState, new()
+         where Op : AOperatorCollection, new()
     {
-        private Queue<GraphNode> openNodes = new Queue<GraphNode>();
+        private List<GraphNode> openNodes = new List<GraphNode>();
         private List<GraphNode> closedNodes = new List<GraphNode>();
-
-        protected override void AddOpenNode(GraphNode newNode)
-        {
-            openNodes.Enqueue(newNode);
-        }
 
         protected override void AddClosedNode(GraphNode newNode)
         {
             closedNodes.Add(newNode);
         }
 
+        protected override void AddOpenNode(GraphNode newNode)
+        {
+            openNodes.Add(newNode);
+            //openNodes.OrderBy(node => node.Cost).ToList();
+            openNodes.Sort((node1, node2) => (node1.Cost.CompareTo(node2.Cost)));
+
+        }
+
         protected override GraphNode getNextOpenNode()
         {
-            return openNodes.Dequeue();
+            GraphNode next = openNodes[0];
+            openNodes.RemoveAt(0);
+            return next;
         }
 
         protected override bool isOpen()
@@ -37,7 +42,6 @@ namespace BallsProblem
         {
             return closedNodes.Count;
         }
-
         protected override bool loopDetected(GraphNode currentNode)
         {
             //foreach (GraphNode item in closedNodes)
@@ -50,9 +54,8 @@ namespace BallsProblem
             //    if (item.Equals(currentNode))
             //        return false;
             //}
-             return false;
-
-           // return (closedNodes.Contains(currentNode) || openNodes.Contains(currentNode));
+            return false;
+             //return (closedNodes.Contains(currentNode) || openNodes.Contains(currentNode));
         }
     }
 }

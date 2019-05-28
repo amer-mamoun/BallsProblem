@@ -46,11 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AAlgorithem.cs" />
     <Compile Include="AOperatorCollection.cs" />
     <Compile Include="ATreeSearch.cs" />
     <Compile Include="BallOpperatorCollection.cs" />
     <Compile Include="BallState.cs" />
     <Compile Include="BreadthFirstSearch.cs" />
+    <Compile Include="DepthFirstSearch.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

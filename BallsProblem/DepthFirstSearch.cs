@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace BallsProblem
 {
-    class BreadthFirstSearch<S, Op> : ATreeSearch<S, Op>
+    class DepthFirstSearch<S, Op> : ATreeSearch<S, Op>
         where S : IState, new()
         where Op : AOperatorCollection, new()
     {
-        private Queue<GraphNode> openNodes = new Queue<GraphNode>();
+        private Stack<GraphNode> openNodes = new Stack<GraphNode>();
         private List<GraphNode> closedNodes = new List<GraphNode>();
 
         protected override void AddOpenNode(GraphNode newNode)
         {
-            openNodes.Enqueue(newNode);
+            openNodes.Push(newNode);
         }
 
         protected override void AddClosedNode(GraphNode newNode)
@@ -25,7 +25,7 @@ namespace BallsProblem
 
         protected override GraphNode getNextOpenNode()
         {
-            return openNodes.Dequeue();
+            return openNodes.Pop();
         }
 
         protected override bool isOpen()
@@ -50,9 +50,10 @@ namespace BallsProblem
             //    if (item.Equals(currentNode))
             //        return false;
             //}
-             return false;
+            return false;
 
-           // return (closedNodes.Contains(currentNode) || openNodes.Contains(currentNode));
+            // return (closedNodes.Contains(currentNode) || openNodes.Contains(currentNode));
         }
     }
 }
+

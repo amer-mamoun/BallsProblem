@@ -98,6 +98,8 @@ namespace BallsProblem
             {
                 if (this.square[i] != state.square[i]) return false;
             }
+            //if (this.square.Equals(state.square)) return true;
+
             return true;
         }
     }
